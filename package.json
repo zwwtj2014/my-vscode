@@ -1,0 +1,81 @@
+{
+    "name": "my-vscode-plugin",
+    "displayName": "Clam VSCode",
+    "description": "Customized VSCode By Clam",
+    "version": "0.0.1",
+    "publisher": "clam",
+    "repository": "https://github.com/zwwtj2014/my-vscode.git",
+    "keywords": [
+        "customized",
+        "clam",
+        "markdown",
+        "typora"
+    ],
+    "engines": {
+        "vscode": "^1.26.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.openMarkDown"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [{
+            "command": "extension.openMarkDown",
+            "title": "Open MarkDown"
+        }],
+        "configuration": {
+            "type": "object",
+            "title": "plugin open-markdown",
+            "properties": {
+                "openMarkdown.defaultApp": {
+                    "type": "string",
+                    "default": "typora",
+                    "description": "Set default app to open markdown"
+                },
+                "openMarkdown.isElectron": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Set Identify the electron app"
+                }
+            }
+        },
+        "menus": {
+            "explorer/context": [{
+                "when": "resourceLangId == markdown",
+                "command": "extension.openMarkDown",
+                "group": "clam vscode"
+            }],
+            "editor/context": [{
+                "when": "resourceLangId == markdown",
+                "command": "extension.openMarkDown",
+                "group": "clam vscode"
+            }],
+            "editor/title/context": [{
+                "when": "resourceLangId == markdown",
+                "command": "extension.openMarkDown",
+                "group": "clam vscode"
+            }]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "is-wsl": "^1.1.0",
+        "opn": "^5.3.0"
+    }
+}
